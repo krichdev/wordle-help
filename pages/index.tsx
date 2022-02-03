@@ -3,12 +3,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { globalWordSearch } from '../lib/wordSearch';
 
 const Home = () => {
-  const [letters, setLetters] = useState({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-    4: '',
+  const [letters, setLetters] = useState<Record<string, string>>({
+    "0": '',
+    "1": '',
+    "2": '',
+    "3": '',
+    "4": '',
   });
   const [wordList, setWordList] = useState<string[]>([]);
   const firstRef = useRef<HTMLInputElement>(null);
@@ -38,14 +38,14 @@ const Home = () => {
           <>
             <div className='grid grid-cols-5 gap-2 w-[350px] h-[62px]'>
             <input
-              className={`w-full ${letters[0] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
-              value={letters[0]}
+              className={`w-full ${letters["0"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+              value={letters["0"]}
               ref={firstRef}
               type="text"
               maxLength={1}
               onChange={(e) => setLetters({
                 ...letters,
-                0: e.target.value.toUpperCase(),
+                "0": e.target.value.toUpperCase(),
               })}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
@@ -54,13 +54,13 @@ const Home = () => {
               }}
             />
             <input
-              className={`w-full ${letters[1] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
-              value={letters[1]}
+              className={`w-full ${letters["1"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+              value={letters["1"]}
               type="text"
               maxLength={1}
               onChange={(e) => setLetters({
                 ...letters,
-                1: e.target.value.toUpperCase(),
+                "1": e.target.value.toUpperCase(),
               })}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
@@ -69,13 +69,13 @@ const Home = () => {
               }}
             />
             <input
-              className={`w-full ${letters[2] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
-              value={letters[2]}
+              className={`w-full ${letters["2"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+              value={letters["2"]}
               type="text"
               maxLength={1}
               onChange={(e) => setLetters({
                 ...letters,
-                2: e.target.value.toUpperCase(),
+                "2": e.target.value.toUpperCase(),
               })}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
@@ -84,13 +84,13 @@ const Home = () => {
               }}
             />
             <input
-              className={`w-full ${letters[3] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
-              value={letters[3]}
+              className={`w-full ${letters["3"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+              value={letters["3"]}
               type="text"
               maxLength={1}
               onChange={(e) => setLetters({
                 ...letters,
-                3: e.target.value.toUpperCase(),
+                "3": e.target.value.toUpperCase(),
               })}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
@@ -99,13 +99,13 @@ const Home = () => {
               }}
             />
             <input
-              className={`w-full ${letters[4] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
-              value={letters[4]}
+              className={`w-full ${letters["4"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+              value={letters["4"]}
               type="text"
               maxLength={1}
               onChange={(e) => setLetters({
                 ...letters,
-                4: e.target.value.toUpperCase(),
+                "4": e.target.value.toUpperCase(),
               })}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
@@ -120,7 +120,7 @@ const Home = () => {
             <button
             className='w-[350px] h-12 px-6 mt-8 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg'
             onClick={() => handleWordSearch()}
-            disabled={Object.keys(letters).filter(key => letters[parseInt(key)] === '').length === 5}
+            disabled={Object.keys(letters).filter(key => letters[key] === '').length === 5}
           >
             Find Words
           </button>
