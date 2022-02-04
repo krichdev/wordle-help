@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, RefObject } from 'react'
 import { globalWordSearch } from '../lib/wordSearch';
 
 const Home = () => {
@@ -12,6 +12,11 @@ const Home = () => {
   });
   const [wordList, setWordList] = useState<string[]>([]);
   const firstRef = useRef<HTMLInputElement>(null);
+  const secondRef = useRef<HTMLInputElement>(null);
+  const thirdRef = useRef<HTMLInputElement>(null);
+  const fourthRef = useRef<HTMLInputElement>(null);
+  const fifthRef = useRef<HTMLInputElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     firstRef.current?.focus();
@@ -23,11 +28,27 @@ const Home = () => {
     setWordList(matches);
   }
 
+  const handleChange = (letter: string, key: string, ref: RefObject<HTMLInputElement> | null) => {
+    setLetters({
+      ...letters,
+      [key]: letter,
+    });
+    ref && ref.current?.focus();
+  }
+
+  const findButtonDisabled =
+    Object.keys(letters).filter(key => letters[key] === '').length === 5 ||
+    Object.keys(letters).filter(key => letters[key] !== '').length === 5
+
+
    return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>Wordle Words That Start With...</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Help Solve Your Worlde Word</title>
+        <link rel="icon" href="/wordlefav.ico" />
+        <meta property='og:image' content='/wordleimg.png' key='ogimage' />
+        <meta property='og:image' content='/wordleimg.png' key='ogimage' />
+        <meta property='og:image' content='/wordleimg.png' key='ogimage' />
       </Head>
 
       <main className="flex w-full flex-1 flex-col items-center mt-20 px-20 text-center">
@@ -44,10 +65,7 @@ const Home = () => {
               ref={firstRef}
               type="text"
               maxLength={1}
-              onChange={(e) => setLetters({
-                ...letters,
-                "0": e.target.value.toUpperCase(),
-              })}
+              onChange={(e) => handleChange(e.target.value.toUpperCase(), "0", secondRef)}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
                   e.preventDefault();
@@ -57,12 +75,10 @@ const Home = () => {
             <input
               className={`w-full ${letters["1"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
               value={letters["1"]}
+              ref={secondRef}
               type="text"
               maxLength={1}
-              onChange={(e) => setLetters({
-                ...letters,
-                "1": e.target.value.toUpperCase(),
-              })}
+              onChange={(e) => handleChange(e.target.value.toUpperCase(), "1", thirdRef)}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
                   e.preventDefault();
@@ -72,12 +88,10 @@ const Home = () => {
             <input
               className={`w-full ${letters["2"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
               value={letters["2"]}
+              ref={thirdRef}
               type="text"
               maxLength={1}
-              onChange={(e) => setLetters({
-                ...letters,
-                "2": e.target.value.toUpperCase(),
-              })}
+              onChange={(e) => handleChange(e.target.value.toUpperCase(), "2", fourthRef)}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
                   e.preventDefault();
@@ -87,12 +101,10 @@ const Home = () => {
             <input
               className={`w-full ${letters["3"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
               value={letters["3"]}
+              ref={fourthRef}
               type="text"
               maxLength={1}
-              onChange={(e) => setLetters({
-                ...letters,
-                "3": e.target.value.toUpperCase(),
-              })}
+              onChange={(e) => handleChange(e.target.value.toUpperCase(), "3", fifthRef)}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
                   e.preventDefault();
@@ -102,12 +114,10 @@ const Home = () => {
             <input
               className={`w-full ${letters["4"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
               value={letters["4"]}
+              ref={fifthRef}
               type="text"
               maxLength={1}
-              onChange={(e) => setLetters({
-                ...letters,
-                "4": e.target.value.toUpperCase(),
-              })}
+              onChange={(e) => handleChange(e.target.value.toUpperCase(), "4", null)}
               onKeyPress={(e) => {
                 if (!/[A-Za-z]/.test(e.key)) {
                   e.preventDefault();
@@ -119,10 +129,10 @@ const Home = () => {
         )}
         {wordList.length <= 0 ? (
             <button
-            className='w-[350px] h-12 px-6 mt-8 text-indigo-100 transition-colors duration-150 bg-blue-600 rounded-lg'
-            onClick={() => handleWordSearch()}
-            disabled={Object.keys(letters).filter(key => letters[key] === '').length === 5}
-          >
+              className='w-[350px] h-12 px-6 mt-8 text-indigo-100 transition-colors duration-150 bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed rounded-lg'
+              onClick={() => handleWordSearch()}
+              disabled={findButtonDisabled}
+            >
             Find Words
           </button>
         ) : (
