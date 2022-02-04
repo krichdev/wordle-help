@@ -35,8 +35,9 @@ const Home = () => {
             Wordle Helps
         </h1>
         {wordList.length <= 0 && (
-          <>
-            <div className='grid grid-cols-5 gap-2 w-[350px] h-[62px]'>
+          <div className="w-[350px]">
+            <p>Enter in letters in known positions to get some help solving wordle!</p>
+            <div className='grid grid-cols-5 gap-2 w-full h-[62px] mt-8'>
             <input
               className={`w-full ${letters["0"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
               value={letters["0"]}
@@ -114,7 +115,7 @@ const Home = () => {
               }}
             />
           </div>
-        </>
+        </div>
         )}
         {wordList.length <= 0 ? (
             <button
