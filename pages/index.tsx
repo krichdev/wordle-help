@@ -33,7 +33,6 @@ const Home = () => {
       ...letters,
       [key]: letter,
     });
-    ref && ref.current?.focus();
   }
 
   const findButtonDisabled =
@@ -46,8 +45,6 @@ const Home = () => {
       <Head>
         <title>Help Solve Your Worlde Word</title>
         <link rel="icon" href="/wordlefav.ico" />
-        <meta property='og:image' content='/wordleimg.png' key='ogimage' />
-        <meta property='og:image' content='/wordleimg.png' key='ogimage' />
         <meta property='og:image' content='/wordleimg.png' key='ogimage' />
       </Head>
 
