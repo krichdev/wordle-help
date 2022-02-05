@@ -37,7 +37,7 @@ const Home = () => {
       `input[name=letter-${parseInt(key) + 1}]`
     );
     // @ts-ignore
-    if(e.nativeEvent.inputType !== 'deleteContentBackward') {
+    if(e.nativeEvent.inputType !== 'deleteContentBackward' && key !== "4") {
       // @ts-ignore
       nextSibling!.focus();
     }
