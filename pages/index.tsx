@@ -85,6 +85,7 @@ const Home = () => {
                       e.preventDefault();
                     }
                   }}
+                  onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
                 <input
                   className={`w-full ${letters["1"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
@@ -98,6 +99,7 @@ const Home = () => {
                       e.preventDefault();
                     }
                   }}
+                  onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
                 <input
                   className={`w-full ${letters["2"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
@@ -111,6 +113,7 @@ const Home = () => {
                       e.preventDefault();
                     }
                   }}
+                  onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
                 <input
                   className={`w-full ${letters["3"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
@@ -124,6 +127,7 @@ const Home = () => {
                       e.preventDefault();
                     }
                   }}
+                  onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
                 <input
                   className={`w-full ${letters["4"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
@@ -137,6 +141,7 @@ const Home = () => {
                       e.preventDefault();
                     }
                   }}
+                  onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />
               </form>
             )}
