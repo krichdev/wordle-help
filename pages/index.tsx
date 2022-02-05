@@ -32,7 +32,15 @@ const Home = () => {
     setMessage(message);
   }
 
-  const handleChange = (letter: string, key: string) => {
+  const handleChange = (letter: string, key: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const nextSibling = document.querySelector(
+      `input[name=letter-${parseInt(key) + 1}]`
+    );
+    // @ts-ignore
+    if(e.nativeEvent.inputType !== 'deleteContentBackward') {
+      // @ts-ignore
+      nextSibling!.focus();
+    }
     setLetters({
       ...letters,
       [key]: letter,
@@ -63,14 +71,15 @@ const Home = () => {
               <p>{message}</p>
             )}
             {!message && (
-              <div className='grid grid-cols-5 gap-2 w-full h-[62px] mt-8'>
+              <form className='grid grid-cols-5 gap-2 w-full h-[62px] mt-8'>
                 <input
                   className={`w-full ${letters["0"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
+                  name="letter-0"
                   value={letters["0"]}
                   ref={firstRef}
                   type="text"
                   maxLength={1}
-                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "0")}
+                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "0", e)}
                   onKeyPress={(e) => {
                     if (!/[A-Za-z]/.test(e.key)) {
                       e.preventDefault();
@@ -80,9 +89,10 @@ const Home = () => {
                 <input
                   className={`w-full ${letters["1"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
                   value={letters["1"]}
+                  name="letter-1"
                   type="text"
                   maxLength={1}
-                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "1")}
+                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "1", e)}
                   onKeyPress={(e) => {
                     if (!/[A-Za-z]/.test(e.key)) {
                       e.preventDefault();
@@ -92,9 +102,10 @@ const Home = () => {
                 <input
                   className={`w-full ${letters["2"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
                   value={letters["2"]}
+                  name="letter-2"
                   type="text"
                   maxLength={1}
-                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "2")}
+                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "2", e)}
                   onKeyPress={(e) => {
                     if (!/[A-Za-z]/.test(e.key)) {
                       e.preventDefault();
@@ -104,9 +115,10 @@ const Home = () => {
                 <input
                   className={`w-full ${letters["3"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
                   value={letters["3"]}
+                  name="letter-3"
                   type="text"
                   maxLength={1}
-                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "3")}
+                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "3", e)}
                   onKeyPress={(e) => {
                     if (!/[A-Za-z]/.test(e.key)) {
                       e.preventDefault();
@@ -116,16 +128,17 @@ const Home = () => {
                 <input
                   className={`w-full ${letters["4"] ? 'bg-[#6aaa64] text-white border-none' : 'bg-white'} border-slate-300 border-2 text-center font-extrabold text-3xl`}
                   value={letters["4"]}
+                  name="letter-4"
                   type="text"
                   maxLength={1}
-                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "4")}
+                  onChange={(e) => handleChange(e.target.value.toUpperCase(), "4", e)}
                   onKeyPress={(e) => {
                     if (!/[A-Za-z]/.test(e.key)) {
                       e.preventDefault();
                     }
                   }}
                 />
-              </div>
+              </form>
             )}
         </div>
         {!message ? (
