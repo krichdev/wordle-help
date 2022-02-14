@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import React, { useState, useRef, useEffect, RefObject } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import * as ga from '../lib/gtag'
 
 const Home = () => {
   const [letters, setLetters] = useState<Record<string, string>>({
@@ -19,6 +20,12 @@ const Home = () => {
 
 
   const handleWordSearch = async () => {
+    ga.event({
+      action: 'search',
+      params: {
+        search_term: JSON.stringify(letters)
+      }
+    })
     const response = await fetch('/api/words', {
       method: 'POST',
       headers: {
